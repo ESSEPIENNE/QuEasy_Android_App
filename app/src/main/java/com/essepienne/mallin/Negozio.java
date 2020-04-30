@@ -8,7 +8,7 @@ public class Negozio {
     private boolean disponibile;
     private String immagine;
 
-    Negozio(JSONObject NegozioJson) throws JSONException {
+    public Negozio(JSONObject NegozioJson) throws JSONException {
         this.nome = NegozioJson.getString("name");
         this.disponibile = NegozioJson.getBoolean("disponibile");
         this.immagine=NegozioJson.getString("immagine");

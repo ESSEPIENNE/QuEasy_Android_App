@@ -16,7 +16,7 @@ public class NegozioAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Negozio> Negozi;
 
-    NegozioAdapter(Context context, ArrayList Negozi) {
+    public NegozioAdapter(Context context, ArrayList Negozi) {
         this.context = context;
         this.Negozi=Negozi;
 
