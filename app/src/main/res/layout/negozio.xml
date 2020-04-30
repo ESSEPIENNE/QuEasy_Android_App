@@ -7,7 +7,7 @@
 
 
     <ImageView
-        android:id="@+id/shopView"
+        android:id="@+id/ImmagineNegozio"
         android:layout_width="96dp"
         android:layout_height="37dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,22 +16,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.521"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@drawable/unieuro" />
 
     <TextView
         android:id="@+id/nameShop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="To mare bucchinara"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.069"
-        app:layout_constraintStart_toEndOf="@+id/shopView"
+        app:layout_constraintStart_toEndOf="@+id/ImmagineNegozio"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.512" />
 
     <ImageView
-        android:id="@+id/cancelView"
+        android:id="@+id/disponibilita"
         android:layout_width="43dp"
         android:layout_height="38dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,20 +39,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.545"
-        app:srcCompat="@drawable/ic_launcher_background"
+        app:srcCompat="@drawable/ic_cancel_black_24dp"
         tools:ignore="VectorDrawableCompat" />
 
-    <ImageView
-        android:id="@+id/yesView"
-        android:layout_width="43dp"
-        android:layout_height="38dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.986"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.545"
-        app:srcCompat="@drawable/ic_launcher_foreground"
-        tools:ignore="VectorDrawableCompat" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
