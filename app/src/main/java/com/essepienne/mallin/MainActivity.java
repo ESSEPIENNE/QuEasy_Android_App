@@ -3,8 +3,12 @@ package com.essepienne.mallin;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.essepienne.mallin.Richieste.Get;
 
@@ -21,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final Context ctx = this;
         Config.getInstance().url = "http://192.168.1.223:6969";
+        ListView listaNegozi = findViewById(R.id.lista);
+
 
         Get.genericGet(ctx,"/stores", (response -> {
             try {
@@ -29,14 +35,23 @@ public class MainActivity extends AppCompatActivity {
 
                 for (int i = 0; i < NegoziJson.length(); i++)
                     Negozi.add(new Negozio(NegoziJson.getJSONObject(i)));
+                NegozioAdapter adapter =new NegozioAdapter(ctx, Negozi);
+                listaNegozi.setAdapter(adapter);
 
 
-                ListView l = findViewById(R.id.lista);
-                l.setAdapter(new NegozioAdapter(ctx, Negozi));
+                listaNegozi.setOnItemClickListener((parent, view, position, id) -> {
+                    Intent intent = new Intent(ctx,NegozioActivity.class);
+                    intent.putExtra("idNegozio",adapter.getItem(position));
+                    startActivity(intent);
+
+
+
+                });
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }));
+
 
 
     }
