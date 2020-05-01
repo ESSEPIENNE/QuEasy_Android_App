@@ -23,22 +23,5 @@ public class Get {
                 error -> error.printStackTrace());
         queue.add(request);
     }
-
-
-    public static void getNegozi(final Context ctx, final Function f) {
-        RequestQueue queue = Volley.newRequestQueue(ctx);
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, Config.getInstance().url + "/stores", null,
-                response -> {
-                    ArrayList<Negozio> Negozi = new ArrayList<Negozio>();
-                    try {
-                        for (int i = 0; i < response.length(); i++)
-                            Negozi.add(new Negozio(response.getJSONObject(i)));
-                        f.apply(Negozi);
-                    } catch (Exception e) {
-                    }
-                },
-                error -> error.printStackTrace());
-        queue.add(request);
-    }
 }
 

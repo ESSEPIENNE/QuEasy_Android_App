@@ -27,10 +27,9 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<Negozio> Negozi = new ArrayList<>();
                 JSONArray NegoziJson = (JSONArray) response;
 
-                for (int i = 0; i < NegoziJson.length(); i++) {
-
+                for (int i = 0; i < NegoziJson.length(); i++)
                     Negozi.add(new Negozio(NegoziJson.getJSONObject(i)));
-                }
+
 
                 ListView l = findViewById(R.id.lista);
                 l.setAdapter(new NegozioAdapter(ctx, Negozi));
@@ -38,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }));
+
 
     }
 }

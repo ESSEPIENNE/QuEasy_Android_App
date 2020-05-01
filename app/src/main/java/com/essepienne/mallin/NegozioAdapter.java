@@ -20,7 +20,6 @@ public class NegozioAdapter extends BaseAdapter {
         this.context = context;
         this.Negozi=Negozi;
 
-
     }
 
     @Override
@@ -62,6 +61,7 @@ public class NegozioAdapter extends BaseAdapter {
 
 
         nome.setText(currentNegozio.getNome());
+
         return convertView;
     }
 }
