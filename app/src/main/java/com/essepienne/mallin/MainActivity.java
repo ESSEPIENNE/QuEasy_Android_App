@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final Context ctx = this;
-        Config.getInstance().url = "http://192.168.1.223:6969";
+        Config.getInstance().url = "http://ross.ddns.net:6969";
         ListView listaNegozi = findViewById(R.id.lista);
 
 
