@@ -21,6 +21,7 @@ import com.essepienne.mallin.QrGenerator;
 import com.essepienne.mallin.R;
 import com.essepienne.mallin.Richieste.Get;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,10 +37,11 @@ public class NotificationsFragment extends Fragment {
         Display display = container.getDisplay();
         Point size = new Point();
         display.getSize(size);
-        Get.genericGetObject(ctx , "/codes",(Risposta)->{
+        Get.genericGetArray(ctx , "/codes",(Risposta)->{
             try {
-                JSONObject prova = ((JSONObject)Risposta);
-                QrGenerator q = new QrGenerator(prova.getString("code"),size.y/2);
+                JSONObject AllDay = ((JSONArray)Risposta).getJSONObject(0);
+                JSONObject OneTime = ((JSONArray)Risposta).getJSONObject(1);
+                QrGenerator q = new QrGenerator(AllDay.getString("code"),size.y/2);
                 qr.setImageBitmap(q.QRGenerator());
             } catch (Exception e) {
                 e.printStackTrace();
