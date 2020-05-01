@@ -3,7 +3,7 @@
     package="com.essepienne.mallin">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,13 +13,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".NegozioActivity" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".QueasyActivity"
+            android:label="@string/title_activity_queasy">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity android:name=".NegozioActivity" />
+        <activity android:name=".MainActivity">
+
         </activity>
     </application>
 
