@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Mallin.iml" filepath="$PROJECT_DIR$/Mallin.iml" group="Mallin" />
       <module fileurl="file://$PROJECT_DIR$/app/Mallti-app.iml" filepath="$PROJECT_DIR$/app/Mallti-app.iml" group="Mallin/app" />
+      <module fileurl="file://$PROJECT_DIR$/app/Queasy-App-app.iml" filepath="$PROJECT_DIR$/app/Queasy-App-app.iml" group="Mallin/app" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="Mallin/app" />
     </modules>
   </component>
