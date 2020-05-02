@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -45,6 +46,10 @@ public class NegozioAdapter extends BaseAdapter {
         }
         Negozio currentNegozio = getItem(position);
         TextView nome = convertView.findViewById(R.id.nameShop);
+        ProgressBar pb = convertView.findViewById(R.id.progressBar);
+        pb.setMax(currentNegozio.getMax_in_store()+currentNegozio.getMax_queue());
+        pb.setProgress(currentNegozio.getCurrent_in_store());
+        pb.setSecondaryProgress(currentNegozio.getCurrent_queue()+currentNegozio.getCurrent_in_store());
 
         ImageView logo = convertView.findViewById(R.id.ImmagineNegozio);
         Picasso.get()
