@@ -43,19 +43,10 @@ public class QueasyActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        Post.genericPostObject(getApplicationContext(),"/codes",(Risposta)->{
-            try {
-
-                SharedPreferences pref = getApplicationContext().getSharedPreferences("codice", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putString("codice", ((JSONObject)Risposta).getString("code"));
-                editor.apply();
-                //editor.commit();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        });
-
+        /*Se non ho un codice salvato, lo chiedo*/
+        if(CodeUtils.GetCodice(getBaseContext())==null){
+            CodeUtils.CreaCodice(getBaseContext());
+        }
     }
 
 }

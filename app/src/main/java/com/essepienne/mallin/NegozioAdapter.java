@@ -45,13 +45,7 @@ public class NegozioAdapter extends BaseAdapter {
         }
         Negozio currentNegozio = getItem(position);
         TextView nome = convertView.findViewById(R.id.nameShop);
-        ImageView Disponibilita = convertView.findViewById(R.id.disponibilita);
-        if(currentNegozio.getDisponibilita()){
-            Disponibilita.setImageResource(R.drawable.ic_check_black_24dp);
-        }
-        else{
-            Disponibilita.setImageResource(R.drawable.ic_cancel_black_24dp);
-        }
+
         ImageView logo = convertView.findViewById(R.id.ImmagineNegozio);
         Picasso.get()
                 .load(currentNegozio.getImmagine())

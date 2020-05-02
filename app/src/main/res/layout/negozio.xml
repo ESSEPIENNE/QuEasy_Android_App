@@ -28,19 +28,34 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.512" />
 
-    <ImageView
-        android:id="@+id/disponibilita"
-        android:layout_width="43dp"
-        android:layout_height="38dp"
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/MyProgressBarTwo"
+        android:layout_width="92dp"
+        android:layout_height="26dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.986"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.922"
+        app:layout_constraintStart_toEndOf="@+id/ImmagineNegozio"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.545"
-        app:srcCompat="@drawable/ic_cancel_black_24dp"
-        tools:ignore="VectorDrawableCompat" />
+        android:progress="10"
+        android:secondaryProgress="66"
 
+
+
+        />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Affollamento"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.925"
+        app:layout_constraintStart_toEndOf="@+id/ImmagineNegozio"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
