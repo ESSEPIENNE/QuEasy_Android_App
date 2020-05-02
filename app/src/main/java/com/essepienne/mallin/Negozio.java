@@ -14,8 +14,8 @@ public class Negozio implements Serializable {
     public Negozio(JSONObject NegozioJson) throws JSONException {
         this.nome = NegozioJson.getString("name");
         this.disponibile = true;
-        this.id= NegozioJson.getString("_id");
-        this.immagine=Config.getInstance().url+"/stores/"+this.id+"/logo";
+        this.id = NegozioJson.getString("_id");
+        this.immagine = Config.getInstance().url + "/stores/" + this.id + "/logo";
     }
 
     public String getNome() {
@@ -25,7 +25,8 @@ public class Negozio implements Serializable {
     public boolean getDisponibilita() {
         return this.disponibile;
     }
-    public String getImmagine(){
+
+    public String getImmagine() {
         return this.immagine;
     }
 

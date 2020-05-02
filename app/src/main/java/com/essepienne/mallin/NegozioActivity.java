@@ -18,6 +18,7 @@ public class NegozioActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_negozio);
         LogoNegozio=findViewById(R.id.logoNegozio);
         nomeNegozio=findViewById(R.id.nomeNegozio);
