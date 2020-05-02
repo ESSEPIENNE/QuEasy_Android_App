@@ -1,6 +1,7 @@
 package com.essepienne.mallin.Richieste;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -14,7 +15,10 @@ import com.essepienne.mallin.InterfacciaRichieste;
 public class Get {
     public static void genericGetArray(final Context ctx,final String url, final InterfacciaRichieste f) {
         RequestQueue queue = Volley.newRequestQueue(ctx);
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, Config.getInstance().url + url, null,
+        String finalUrl=Config.getInstance().url + url;
+
+
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, finalUrl, null,
                 response -> {
                     f.apply(response);
                 },

@@ -34,7 +34,7 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.activity_main, container, false);
         final Context ctx = getContext();
-        Config.getInstance().url = "http://ross.ddns.net:6969";
+
         ListView listaNegozi = root.findViewById(R.id.lista);
 
 

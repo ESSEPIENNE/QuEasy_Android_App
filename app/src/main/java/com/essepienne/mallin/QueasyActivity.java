@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.provider.SyncStateContract;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Toast;
 
 import com.essepienne.mallin.Richieste.Get;
+import com.essepienne.mallin.Richieste.Post;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
@@ -29,20 +31,8 @@ public class QueasyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Config.getInstance().url = "http://ross.ddns.net:6969";
 
-
-        Get.genericGetArray(getApplicationContext(), "/codes", (Risposta) -> {
-            try {
-                JSONObject AllDay = ((JSONArray) Risposta).getJSONObject(0);
-                JSONObject OneTime = ((JSONArray) Risposta).getJSONObject(1);
-                SharedPreferences pref = getApplicationContext().getSharedPreferences("codice", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putString("codice", AllDay.getString("code"));
-                editor.commit();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        });;
         setContentView(R.layout.activity_queasy);
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
@@ -52,6 +42,19 @@ public class QueasyActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        Post.genericPostObject(getApplicationContext(),"/codes",(Risposta)->{
+            try {
+
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("codice", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("codice", ((JSONObject)Risposta).getString("code"));
+                editor.apply();
+                //editor.commit();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
 
     }
 
