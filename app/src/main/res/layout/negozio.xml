@@ -5,55 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="60dp">
 
-
     <ImageView
         android:id="@+id/ImmagineNegozio"
-        android:layout_width="96dp"
-        android:layout_height="37dp"
+        android:layout_width="51dp"
+        android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintHorizontal_bias="0.016"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.521" />
+        app:layout_constraintVertical_bias="0.55" />
 
     <TextView
         android:id="@+id/nameShop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintEnd_toStartOf="@+id/barChart"
+        app:layout_constraintHorizontal_bias="0.183"
         app:layout_constraintStart_toEndOf="@+id/ImmagineNegozio"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.512" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="@style/MyProgressBarTwo"
-        android:layout_width="92dp"
-        android:layout_height="26dp"
+    <com.anychart.AnyChartView
+        android:id="@+id/barChart"
+        android:layout_width="195dp"
+        android:layout_height="45dp"
+        android:layout_weight="0.5"
+        android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.922"
+        app:layout_constraintHorizontal_bias="0.968"
         app:layout_constraintStart_toEndOf="@+id/ImmagineNegozio"
         app:layout_constraintTop_toTopOf="parent"
-        android:progress="10"
-        android:secondaryProgress="66"
-
-        />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Affollamento"
-        app:layout_constraintBottom_toTopOf="@+id/progressBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.925"
-        app:layout_constraintStart_toEndOf="@+id/ImmagineNegozio"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-
+        app:layout_constraintVertical_bias="0.533" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+

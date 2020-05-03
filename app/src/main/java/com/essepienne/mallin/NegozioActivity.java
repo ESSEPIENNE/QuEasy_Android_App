@@ -32,10 +32,6 @@ public class NegozioActivity extends AppCompatActivity {
 
         AnyChartView anyChartView = (AnyChartView) findViewById(R.id.grafico);
 
-//        pb.setMax(currentNegozio.getMax_in_store()+currentNegozio.getMax_queue());
-//        pb.setProgress(currentNegozio.getCurrent_in_store());
-//        pb.setSecondaryProgress(currentNegozio.getCurrent_queue()+currentNegozio.getCurrent_in_store());
-
 
         Intent intent = getIntent();
         Negozio negozio = (Negozio) intent.getSerializableExtra("idNegozio");
@@ -154,7 +150,7 @@ public class NegozioActivity extends AppCompatActivity {
         circularGauge.margin(50d, 50d, 50d, 50d);
         circularGauge.title()
                 .text("Andamento coda negozio' +\n" +
-                        "    '<br/><span style=\"color:#929292; font-size: 12px;\">" + negozio.getNome() + "</span>")
+                        "    '<br/><span style=\"color:#929292; font-size: 16px;\">" + negozio.getNome() + "</span>")
 
                 .useHtml(true);
         circularGauge.title().enabled(true);
@@ -162,6 +158,9 @@ public class NegozioActivity extends AppCompatActivity {
         circularGauge.title()
                 .padding(0d, 0d, 0d, 0d)
                 .margin(0d, 0d, 20d, 0d);
+
+        circularGauge.animation(true);
+        circularGauge.autoRedraw(true);
 
         anyChartView.setChart(circularGauge);
     }

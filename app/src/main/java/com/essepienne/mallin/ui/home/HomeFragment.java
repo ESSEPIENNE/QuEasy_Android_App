@@ -24,10 +24,10 @@ import com.essepienne.mallin.Richieste.Get;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
-
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -38,24 +38,21 @@ public class HomeFragment extends Fragment {
         ListView listaNegozi = root.findViewById(R.id.lista);
 
 
-        Get.genericGetArray(ctx,"/stores", (response -> {
+        Get.genericGetArray(ctx, "/stores", (response -> {
             try {
                 ArrayList<Negozio> Negozi = new ArrayList<>();
                 JSONArray NegoziJson = (JSONArray) response;
 
                 for (int i = 0; i < NegoziJson.length(); i++)
                     Negozi.add(new Negozio(NegoziJson.getJSONObject(i)));
-                NegozioAdapter adapter =new NegozioAdapter(ctx, Negozi);
+                NegozioAdapter adapter = new NegozioAdapter(ctx, Negozi);
                 listaNegozi.setAdapter(adapter);
 
 
                 listaNegozi.setOnItemClickListener((parent, view, position, id) -> {
                     Intent intent = new Intent(ctx, NegozioActivity.class);
-                    intent.putExtra("idNegozio",adapter.getItem(position));
+                    intent.putExtra("idNegozio", adapter.getItem(position));
                     startActivity(intent);
-
-
-
                 });
             } catch (Exception e) {
                 e.printStackTrace();
