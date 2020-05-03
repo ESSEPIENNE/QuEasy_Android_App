@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -35,18 +36,19 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.activity_main, container, false);
         final Context ctx = getContext();
 
-        ListView listaNegozi = root.findViewById(R.id.lista);
+        GridView listaNegozi = root.findViewById(R.id.lista);
 
 
         Get.genericGetArray(ctx, "/stores", (response -> {
             try {
                 ArrayList<Negozio> Negozi = new ArrayList<>();
                 JSONArray NegoziJson = (JSONArray) response;
+                for (int k =0;k<50;k++)
+                    for (int i = 0; i < NegoziJson.length(); i++)
+                        Negozi.add(new Negozio(NegoziJson.getJSONObject(i)));
+                    NegozioAdapter adapter = new NegozioAdapter(ctx, Negozi);
+                    listaNegozi.setAdapter(adapter);
 
-                for (int i = 0; i < NegoziJson.length(); i++)
-                    Negozi.add(new Negozio(NegoziJson.getJSONObject(i)));
-                NegozioAdapter adapter = new NegozioAdapter(ctx, Negozi);
-                listaNegozi.setAdapter(adapter);
 
 
                 listaNegozi.setOnItemClickListener((parent, view, position, id) -> {

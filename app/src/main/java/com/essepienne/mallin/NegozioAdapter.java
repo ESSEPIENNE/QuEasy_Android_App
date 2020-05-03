@@ -56,53 +56,17 @@ public class NegozioAdapter extends BaseAdapter {
         }
         Negozio currentNegozio = getItem(position);
         TextView nome = convertView.findViewById(R.id.nameShop);
-//        ProgressBar pb = convertView.findViewById(R.id.progressBar);
-//        pb.setMax(currentNegozio.getMax_in_store() + currentNegozio.getMax_queue());
-//        pb.setProgress(currentNegozio.getCurrent_in_store());
-//        pb.setSecondaryProgress(currentNegozio.getCurrent_queue() + currentNegozio.getCurrent_in_store());
 
-        AnyChartView anyChartView = convertView.findViewById(R.id.barChart);
-//        anyChartView.setProgressBar(convertView.findViewById(R.id.progressBar));
+        ProgressBar ProgressoCoda = convertView.findViewById(R.id.ProgressCoda);
+        ProgressBar  ProgressoNegozio= convertView.findViewById(R.id.ProgressNegozio);
 
-        LinearGauge linearGauge = AnyChart.linear();
+        ProgressoCoda.setMax(currentNegozio.getMax_queue());
+        ProgressoCoda.setProgress(currentNegozio.getCurrent_queue());
 
-        linearGauge.data(new SingleValueDataSet(new Double[] { 5.3D }));
+        ProgressoNegozio.setMax(currentNegozio.getMax_in_store());
+        ProgressoNegozio.setProgress(currentNegozio.getCurrent_in_store());
 
-        linearGauge.layout(Layout.HORIZONTAL);
 
-        OrdinalColor scaleBarColorScale = OrdinalColor.instantiate();
-        scaleBarColorScale.ranges(new String[]{
-                "{ from: 0, to: 7, color: ['green 0.5'] }",
-                "{ from: 7, to: 8, color: ['yellow 0.5'] }",
-                "{ from: 8, to: 10, color: ['red 0.5'] }"
-        });
-
-        linearGauge.scaleBar(0)
-                .width("5%")
-                .colorScale(scaleBarColorScale);
-
-        linearGauge.marker(0)
-                .type(MarkerType.TRIANGLE_DOWN)
-                .color("red")
-                .offset("-3.5%")
-                .zIndex(10);
-
-        linearGauge.scale()
-                .minimum(0)
-                .maximum(10);
-       linearGauge.scale();
-
-        linearGauge.axis(0)
-                .minorTicks(false)
-                .width("1%");
-        linearGauge.axis(0)
-                .offset("-1.5%")
-                .orientation(Orientation.TOP)
-                .labels("top");
-
-        linearGauge.padding(0, 30, 0, 30);
-
-        anyChartView.setChart(linearGauge);
 
         ImageView logo = convertView.findViewById(R.id.ImmagineNegozio);
         Picasso.get()
