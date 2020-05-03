@@ -23,6 +23,7 @@ public class Negozio implements Serializable {
         this.max_queue = NegozioJson.getInt("max_queue");
         current_queue = (int) Math.abs(max_queue - (Math.random() * 10));
         current_in_store = (int) Math.abs(max_in_store - (Math.random() * 10));;
+
     }
 
     public String getNome() {
