@@ -40,11 +40,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
-    CardView CurrentCard;
-    float startX;
-    float startY;
-    float moveHereX;
-    float moveHereY;
+    private CardView CurrentCard;
+    private float startX;
+    private float startY;
+    private float moveHereX;
+    private float moveHereY;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -73,13 +73,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-//        BottomNavigationView navigationView = root.findViewById(R.id.nav_view);
-//        navigationView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
 
         Get.genericGetArray(ctx, "/stores", (response -> {
             try {
@@ -96,47 +89,23 @@ public class HomeFragment extends Fragment {
                     closeCard();
                     CurrentCard = (CardView) view;
                     CurrentCard.setElevation(6f);
-                    //c.bringToFront();
                      startX = CurrentCard.getX();
                      startY = CurrentCard.getY();
                      moveHereX = movehere.getX();
                      moveHereY = movehere.getY();
-                    if (moveHereX == startX) {
-//                        c.animate().withLayer()
-//                                .rotationY(90)
-//                                .setDuration(300)
-//                                .scaleX(2/3f)
-//                                .scaleY(2/3f)
-//                                .withEndAction(
-//                                        new Runnable() {
-//                                            @Override
-//                                            public void run() {
-//                                                c.setRotationY(-90);
-//                                                c.animate().withLayer()
-//                                                        .rotationY(0)
-//                                                        .setDuration(300)
-//                                                        .start();
-//                                            }
-//                                        }
-//                                ).start();
-                    } else {
-                        TranslateAnimation animation = new TranslateAnimation(0, moveHereX - startX, 0, moveHereY - startY);
-                        animation.setRepeatMode(0);
-                        animation.setDuration(1000);
-                        animation.setFillAfter(true);
 
-                        CurrentCard.animate()
-                                .setDuration(300)
-                                .scaleX(1.5f)
-                                .scaleY(1.5f)
-                                .withLayer();
+                    TranslateAnimation animation = new TranslateAnimation(0, moveHereX - startX, 0, moveHereY - startY);
+                    animation.setRepeatMode(0);
+                    animation.setDuration(1000);
+                    animation.setFillAfter(true);
 
-                        CurrentCard.startAnimation(animation);
-                    }
-//
-//                    Intent intent = new Intent(ctx, NegozioActivity.class);
-//                    intent.putExtra("idNegozio", adapter.getItem(position));
-//                    startActivity(intent);
+                    CurrentCard.animate()
+                            .setDuration(300)
+                            .scaleX(1.5f)
+                            .scaleY(1.5f)
+                            .withLayer();
+
+                    CurrentCard.startAnimation(animation);
                 });
             } catch (Exception e) {
                 e.printStackTrace();
