@@ -5,29 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="false"
+    android:fillAfter="true"
     tools:context=".MainActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/moveHere"
         android:layout_width="200dp"
         android:layout_height="200dp"
+        android:fillAfter="true"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/lista"
         app:layout_constraintEnd_toEndOf="@+id/lista"
         app:layout_constraintStart_toStartOf="@+id/lista"
-        app:layout_constraintTop_toTopOf="@+id/lista" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Anor"
-            android:gravity="center"
-            android:textSize="30dp"
-            android:layout_gravity="center"
-            android:id="@+id/tv"
-            android:visibility="gone"
-            />
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintTop_toTopOf="@+id/lista" />
 
     <GridView
         android:id="@+id/lista"

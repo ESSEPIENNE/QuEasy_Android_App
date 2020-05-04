@@ -21,9 +21,13 @@ public class Negozio implements Serializable {
         this.immagine = Config.getInstance().url + "/stores/" + this.id + "/logo";
         this.max_in_store = NegozioJson.getInt("max_in_store");
         this.max_queue = NegozioJson.getInt("max_queue");
-        current_queue = (int) Math.abs(max_queue - (Math.random() * 10));
-        current_in_store = (int) Math.abs(max_in_store - (Math.random() * 10));;
 
+        this.current_queue=NegozioJson.getInt("current_in_queue");
+        this.current_in_store=NegozioJson.getInt("current_in_store");
+
+//        Debug:
+//        current_queue = (int) Math.abs(max_queue - (Math.random() * 10));
+//        current_in_store = (int) Math.abs(max_in_store - (Math.random() * 10));
     }
 
     public String getNome() {

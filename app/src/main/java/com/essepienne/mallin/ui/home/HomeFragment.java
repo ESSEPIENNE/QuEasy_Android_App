@@ -14,6 +14,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
+import android.widget.AbsListView;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -39,6 +40,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
+    CardView CurrentCard;
+    float startX;
+    float startY;
+    float moveHereX;
+    float moveHereY;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -48,6 +54,24 @@ public class HomeFragment extends Fragment {
         GridView listaNegozi = root.findViewById(R.id.lista);
         View movehere = root.findViewById(R.id.moveHere);
         root.setElevation(0f);
+        root.setOnClickListener((click)->{
+            CurrentCard.animate()
+                    .setDuration(300)
+                    .scaleX(1)
+                    .scaleY(1)
+                    .withLayer();
+        });
+
+        listaNegozi.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                closeCard();
+            }
+        });
 
 //        BottomNavigationView navigationView = root.findViewById(R.id.nav_view);
 //        navigationView.setOnClickListener(new View.OnClickListener() {
@@ -69,13 +93,14 @@ public class HomeFragment extends Fragment {
 
 
                 listaNegozi.setOnItemClickListener((parent, view, position, id) -> {
-                    CardView c = (CardView) view;
-                    //c.setElevation(6f);
-                    c.bringToFront();
-                    float startX = c.getX();
-                    float startY = c.getY();
-                    float moveHereX = movehere.getX();
-                    float moveHereY = movehere.getY();
+                    closeCard();
+                    CurrentCard = (CardView) view;
+                    CurrentCard.setElevation(6f);
+                    //c.bringToFront();
+                     startX = CurrentCard.getX();
+                     startY = CurrentCard.getY();
+                     moveHereX = movehere.getX();
+                     moveHereY = movehere.getY();
                     if (moveHereX == startX) {
 //                        c.animate().withLayer()
 //                                .rotationY(90)
@@ -99,24 +124,14 @@ public class HomeFragment extends Fragment {
                         animation.setRepeatMode(0);
                         animation.setDuration(1000);
                         animation.setFillAfter(true);
-                        c.startAnimation(animation);
-                        c.animate().withLayer()
-                                .rotationY(90)
+
+                        CurrentCard.animate()
                                 .setDuration(300)
                                 .scaleX(1.5f)
                                 .scaleY(1.5f)
-                                .withEndAction(
-                                        new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                c.setRotationY(-90);
-                                                c.animate().withLayer()
-                                                        .rotationY(0)
-                                                        .setDuration(300)
-                                                        .start();
-                                            }
-                                        }
-                                ).start();
+                                .withLayer();
+
+                        CurrentCard.startAnimation(animation);
                     }
 //
 //                    Intent intent = new Intent(ctx, NegozioActivity.class);
@@ -129,4 +144,23 @@ public class HomeFragment extends Fragment {
         }));
         return root;
     }
+
+    public void closeCard(){
+        if(CurrentCard!=null){
+
+            TranslateAnimation animation = new TranslateAnimation(0, 0, 0, 0);
+            animation.setRepeatMode(0);
+            animation.setDuration(1000);
+            animation.setFillAfter(true);
+
+            CurrentCard.animate()
+                    .setDuration(300)
+                    .scaleX(1f)
+                    .scaleY(1f)
+                    .withLayer();
+            CurrentCard.startAnimation(animation);
+            CurrentCard=null;
+        }
+    }
 }
+
