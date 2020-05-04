@@ -70,29 +70,54 @@ public class HomeFragment extends Fragment {
 
                 listaNegozi.setOnItemClickListener((parent, view, position, id) -> {
                     CardView c = (CardView) view;
-                    c.setElevation(100f);
-                    TranslateAnimation animation = new TranslateAnimation(0, movehere.getX() - c.getX(), 0.f, movehere.getY() - c.getY());
-                    animation.setRepeatMode(0);
-                    animation.setDuration(1000);
-                    animation.setFillAfter(true);
-                    c.startAnimation(animation);
-                    c.animate().withLayer()
-                            .rotationY(90)
-                            .setDuration(300)
-                            .scaleX(1.5f)
-                            .scaleY(1.5f)
-                            .withEndAction(
-                                    new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            c.setRotationY(-90);
-                                            c.animate().withLayer()
-                                                    .rotationY(0)
-                                                    .setDuration(300)
-                                                    .start();
+                    //c.setElevation(6f);
+                    c.bringToFront();
+                    float startX = c.getX();
+                    float startY = c.getY();
+                    float moveHereX = movehere.getX();
+                    float moveHereY = movehere.getY();
+                    if (moveHereX == startX) {
+//                        c.animate().withLayer()
+//                                .rotationY(90)
+//                                .setDuration(300)
+//                                .scaleX(2/3f)
+//                                .scaleY(2/3f)
+//                                .withEndAction(
+//                                        new Runnable() {
+//                                            @Override
+//                                            public void run() {
+//                                                c.setRotationY(-90);
+//                                                c.animate().withLayer()
+//                                                        .rotationY(0)
+//                                                        .setDuration(300)
+//                                                        .start();
+//                                            }
+//                                        }
+//                                ).start();
+                    } else {
+                        TranslateAnimation animation = new TranslateAnimation(0, moveHereX - startX, 0, moveHereY - startY);
+                        animation.setRepeatMode(0);
+                        animation.setDuration(1000);
+                        animation.setFillAfter(true);
+                        c.startAnimation(animation);
+                        c.animate().withLayer()
+                                .rotationY(90)
+                                .setDuration(300)
+                                .scaleX(1.5f)
+                                .scaleY(1.5f)
+                                .withEndAction(
+                                        new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                c.setRotationY(-90);
+                                                c.animate().withLayer()
+                                                        .rotationY(0)
+                                                        .setDuration(300)
+                                                        .start();
+                                            }
                                         }
-                                    }
-                            ).start();
+                                ).start();
+                    }
 //
 //                    Intent intent = new Intent(ctx, NegozioActivity.class);
 //                    intent.putExtra("idNegozio", adapter.getItem(position));
