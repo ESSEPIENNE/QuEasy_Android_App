@@ -4,4 +4,5 @@
     <string name="title_Negozi">Negozi</string>
     <string name="title_Qr">Qr codes</string>
     <string name="title_activity_queasy">QueasyActivity</string>
+    <integer name="swing_anim_time">750</integer>
 </resources>

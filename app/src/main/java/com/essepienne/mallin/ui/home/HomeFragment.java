@@ -6,12 +6,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -52,9 +55,26 @@ public class HomeFragment extends Fragment {
 
 
                 listaNegozi.setOnItemClickListener((parent, view, position, id) -> {
-                    Intent intent = new Intent(ctx, NegozioActivity.class);
-                    intent.putExtra("idNegozio", adapter.getItem(position));
-                    startActivity(intent);
+                    CardView c = (CardView) view;
+
+                    c.animate().withLayer()
+                            .rotationY(90)
+                            .setDuration(300)
+                            .withEndAction(
+                                    new Runnable() {
+                                        @Override public void run() {
+                                            c.setRotationY(-90);
+                                            c.animate().withLayer()
+                                                    .rotationY(0)
+                                                    .setDuration(300)
+                                                    .start();
+                                        }
+                                    }
+                            ).start();
+//
+//                    Intent intent = new Intent(ctx, NegozioActivity.class);
+//                    intent.putExtra("idNegozio", adapter.getItem(position));
+//                    startActivity(intent);
                 });
             } catch (Exception e) {
                 e.printStackTrace();
