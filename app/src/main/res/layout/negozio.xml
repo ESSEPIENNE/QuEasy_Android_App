@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="200dp"
+    android:elevation="2dp"
     tools:ignore="MissingConstraints">
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -26,6 +27,7 @@
             android:layout_height="21dp"
             android:fontFamily="Montserrat"
             android:textFontWeight="900"
+            android:gravity="center"
             app:layout_constraintBottom_toTopOf="@+id/ImmagineNegozio"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -4,11 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipChildren="false"
     tools:context=".MainActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/moveHere"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/lista"
+        app:layout_constraintEnd_toEndOf="@+id/lista"
+        app:layout_constraintStart_toStartOf="@+id/lista"
+        app:layout_constraintTop_toTopOf="@+id/lista" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Anor"
+            android:gravity="center"
+            android:textSize="30dp"
+            android:layout_gravity="center"
+            android:id="@+id/tv"
+            android:visibility="gone"
+            />
+    </androidx.cardview.widget.CardView>
 
     <GridView
         android:id="@+id/lista"
-
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
@@ -17,11 +39,14 @@
         android:horizontalSpacing="10dp"
         android:numColumns="2"
         android:verticalSpacing="10dp"
+        android:clipChildren="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0" >
+
+    </GridView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

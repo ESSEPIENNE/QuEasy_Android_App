@@ -31,7 +31,7 @@ public class NotificationsFragment extends Fragment {
         assert ctx != null;
         SharedPreferences sharedPreferences = ctx.getSharedPreferences("codice", Context.MODE_PRIVATE);
         String cod = sharedPreferences.getString("codice", "ciaomore");
-        QrGenerator q = new QrGenerator(cod,size.y/2);
+        QrGenerator q = new QrGenerator(cod, size.y / 2);
         qr.setImageBitmap(q.QRGenerator());
         codice.setText(cod);
         return root;
