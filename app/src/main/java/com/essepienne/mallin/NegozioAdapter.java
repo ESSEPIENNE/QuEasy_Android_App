@@ -88,6 +88,7 @@ public class NegozioAdapter extends BaseAdapter {
 
 
         nome.setText(currentNegozio.getNome());
+        convertView.setElevation(1);
 
         return convertView;
     }

@@ -45,6 +45,7 @@ public class HomeFragment extends Fragment {
     private float startY;
     private float moveHereX;
     private float moveHereY;
+    private int DurationAnimation=300;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -54,13 +55,7 @@ public class HomeFragment extends Fragment {
         GridView listaNegozi = root.findViewById(R.id.lista);
         View movehere = root.findViewById(R.id.moveHere);
         root.setElevation(0f);
-        root.setOnClickListener((click)->{
-            CurrentCard.animate()
-                    .setDuration(300)
-                    .scaleX(1)
-                    .scaleY(1)
-                    .withLayer();
-        });
+        root.setOnClickListener((click)->closeCard());
 
         listaNegozi.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -88,7 +83,7 @@ public class HomeFragment extends Fragment {
                 listaNegozi.setOnItemClickListener((parent, view, position, id) -> {
                     closeCard();
                     CurrentCard = (CardView) view;
-                    CurrentCard.setElevation(6f);
+                    CurrentCard.setElevation(2);
                      startX = CurrentCard.getX();
                      startY = CurrentCard.getY();
                      moveHereX = movehere.getX();
@@ -96,11 +91,11 @@ public class HomeFragment extends Fragment {
 
                     TranslateAnimation animation = new TranslateAnimation(0, moveHereX - startX, 0, moveHereY - startY);
                     animation.setRepeatMode(0);
-                    animation.setDuration(1000);
+                    animation.setDuration(DurationAnimation);
                     animation.setFillAfter(true);
 
                     CurrentCard.animate()
-                            .setDuration(300)
+                            .setDuration(DurationAnimation)
                             .scaleX(1.5f)
                             .scaleY(1.5f)
                             .withLayer();
@@ -119,15 +114,16 @@ public class HomeFragment extends Fragment {
 
             TranslateAnimation animation = new TranslateAnimation(0, 0, 0, 0);
             animation.setRepeatMode(0);
-            animation.setDuration(1000);
+            animation.setDuration(DurationAnimation);
             animation.setFillAfter(true);
 
             CurrentCard.animate()
-                    .setDuration(300)
+                    .setDuration(DurationAnimation)
                     .scaleX(1f)
                     .scaleY(1f)
                     .withLayer();
             CurrentCard.startAnimation(animation);
+            CurrentCard.setElevation(1);
             CurrentCard=null;
         }
     }
