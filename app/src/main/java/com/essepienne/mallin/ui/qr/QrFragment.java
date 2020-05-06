@@ -1,4 +1,4 @@
-package com.essepienne.mallin.ui.notifications;
+package com.essepienne.mallin.ui.qr;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -17,12 +17,12 @@ import androidx.fragment.app.Fragment;
 import com.essepienne.mallin.QrGenerator;
 import com.essepienne.mallin.R;
 
-public class NotificationsFragment extends Fragment {
+public class QrFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         final Context ctx = getActivity();
-        View root = inflater.inflate(R.layout.fragment_notifications, container, false);
+        View root = inflater.inflate(R.layout.fragment_qr, container, false);
         final ImageView qr = root.findViewById(R.id.qr);
         TextView codice = root.findViewById(R.id.codiceText);
         Display display = container.getDisplay();

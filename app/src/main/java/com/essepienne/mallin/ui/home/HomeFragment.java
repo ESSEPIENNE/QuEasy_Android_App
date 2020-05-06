@@ -109,8 +109,6 @@ public class HomeFragment extends Fragment {
     public void openCard(View view){
         closeCard();
         CurrentCard = (CardView) view;
-
-
         startX = CurrentCard.getX();
         startY = CurrentCard.getY();
         moveHereX = movehere.getX();
@@ -128,7 +126,6 @@ public class HomeFragment extends Fragment {
         CurrentCard.setOnClickListener((carta)->{
             closeCard();
             carta.setOnClickListener(this::openCard);
-
         });
         CurrentCard.setElevation(10);
     }

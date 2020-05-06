@@ -1,7 +1,6 @@
 package com.essepienne.mallin.Richieste;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -9,7 +8,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.essepienne.mallin.Config;
-import com.essepienne.mallin.InterfacciaRichieste;
 
 
 public class Get {
