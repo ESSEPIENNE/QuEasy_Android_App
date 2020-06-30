@@ -1,23 +1,9 @@
 package com.essepienne.mallin;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.SyncStateContract;
-import android.util.AttributeSet;
-import android.view.View;
-import android.widget.Toast;
 
-import com.essepienne.mallin.Richieste.Get;
-import com.essepienne.mallin.Richieste.Post;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;

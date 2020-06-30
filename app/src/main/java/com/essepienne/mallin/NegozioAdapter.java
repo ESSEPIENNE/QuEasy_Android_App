@@ -1,7 +1,6 @@
 package com.essepienne.mallin;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +11,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.anychart.AnyChart;
-import com.anychart.AnyChartView;
-import com.anychart.chart.common.dataentry.SingleValueDataSet;
-import com.anychart.charts.LinearGauge;
-import com.anychart.enums.Anchor;
-import com.anychart.enums.Layout;
-import com.anychart.enums.MarkerType;
-import com.anychart.enums.Orientation;
-import com.anychart.enums.Position;
-import com.anychart.scales.OrdinalColor;
 
 import com.squareup.picasso.Picasso;
 

@@ -3,7 +3,6 @@ package com.essepienne.mallin;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.essepienne.mallin.Richieste.Get;
 import com.essepienne.mallin.Richieste.Post;
 
 import org.json.JSONException;
