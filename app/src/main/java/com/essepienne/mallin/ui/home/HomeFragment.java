@@ -27,6 +27,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.essepienne.mallin.Config;
 import com.essepienne.mallin.Negozio;
@@ -49,7 +50,7 @@ public class HomeFragment extends Fragment {
     private float moveHereX;
     private float moveHereY;
     private int DurationAnimation=300;
-
+    private SwipeRefreshLayout swipeContainer ;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -57,6 +58,9 @@ public class HomeFragment extends Fragment {
         final Context ctx = getContext();
         GridView listaNegozi = root.findViewById(R.id.lista);
         movehere = root.findViewById(R.id.moveHere);
+
+        swipeContainer = (SwipeRefreshLayout) root.findViewById(R.id.swipeContainer);
+
         root.setElevation(0f);
         root.setOnClickListener((click)->closeCard());
 
@@ -70,29 +74,36 @@ public class HomeFragment extends Fragment {
                 closeCard();
             }
         });
+        AggiungiNegozi(ctx,listaNegozi);
 
-
-        Get.genericGetArray(ctx, "/stores", (response -> {
-            try {
-                ArrayList<Negozio> Negozi = new ArrayList<>();
-                JSONArray NegoziJson = (JSONArray) response;
-                for (int k = 0; k < 50; k++)
-                    for (int i = 0; i < NegoziJson.length(); i++)
-                        Negozi.add(new Negozio(NegoziJson.getJSONObject(i)));
-                NegozioAdapter adapter = new NegozioAdapter(ctx, Negozi);
-                listaNegozi.setAdapter(adapter);
-                listaNegozi.setOnItemClickListener((parent, view, position, id) -> {
-                    if(view==CurrentCard)closeCard();
-                    else openCard(view);
-
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                AggiungiNegozi(ctx,listaNegozi);
             }
-        }));
+        });
         return root;
     }
+public void AggiungiNegozi(Context ctx, GridView listaNegozi){
+    Get.genericGetArray(ctx, "/stores", (response -> {
+        try {
+            ArrayList<Negozio> Negozi = new ArrayList<>();
+            JSONArray NegoziJson = (JSONArray) response;
+            for (int i = 0; i < NegoziJson.length(); i++)
+                Negozi.add(new Negozio(NegoziJson.getJSONObject(i)));
+            NegozioAdapter adapter = new NegozioAdapter(ctx, Negozi);
+            listaNegozi.setAdapter(adapter);
+            listaNegozi.setOnItemClickListener((parent, view, position, id) -> {
+                if(view==CurrentCard)closeCard();
+                else openCard(view);
 
+            });
+            swipeContainer.setRefreshing(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }));
+}
     public void closeCard(){
         if(CurrentCard!=null){
             CurrentCard.animate()
@@ -102,6 +113,21 @@ public class HomeFragment extends Fragment {
                     .scaleX(1f)
                     .scaleY(1f)
                     .withLayer().start();
+
+            View immagine = CurrentCard.findViewById(R.id.LayoutNegozioSopra);
+            immagine.animate().setDuration(DurationAnimation)
+                    .scaleX(1f)
+                    .scaleY(1f)
+                    .translationY(0f)
+                    .withLayer()
+                    .start();
+
+            TextView PersoneInCoda = CurrentCard.findViewById(R.id.PersoneInCoda);
+            TextView PersoneDentroAlNegozio=CurrentCard.findViewById(R.id.PersoneDentroAlNegozio);
+
+            PersoneInCoda.setVisibility(View.INVISIBLE);
+            PersoneDentroAlNegozio.setVisibility(View.INVISIBLE);
+
             CurrentCard.setElevation(1);
             CurrentCard=null;
         }
@@ -113,6 +139,15 @@ public class HomeFragment extends Fragment {
         startY = CurrentCard.getY();
         moveHereX = movehere.getX();
         moveHereY = movehere.getY();
+        View immagine = view.findViewById(R.id.LayoutNegozioSopra);
+
+
+        immagine.animate().setDuration(DurationAnimation)
+                .scaleX(0.8f)
+                .scaleY(0.8f)
+                .translationY(-50f)
+                .withLayer()
+                .start();
 
         CurrentCard.animate()
                 .setDuration(DurationAnimation)
@@ -127,7 +162,13 @@ public class HomeFragment extends Fragment {
             closeCard();
             carta.setOnClickListener(this::openCard);
         });
+        TextView PersoneInCoda = view.findViewById(R.id.PersoneInCoda);
+        TextView PersoneDentroAlNegozio=view.findViewById(R.id.PersoneDentroAlNegozio);
+
+        PersoneInCoda.setVisibility(View.VISIBLE);
+        PersoneDentroAlNegozio.setVisibility(View.VISIBLE);
         CurrentCard.setElevation(10);
+
     }
 }
 

@@ -26,6 +26,9 @@ import com.anychart.scales.OrdinalColor;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Random;
+
+import static java.lang.Math.random;
 
 public class NegozioAdapter extends BaseAdapter {
     private Context context;
@@ -59,7 +62,7 @@ public class NegozioAdapter extends BaseAdapter {
                     inflate(R.layout.negozio, parent, false);
         }
         Animation animation;
-        int i = ((int) (Math.random() * 10)) % 2;
+        int i = ((int) (random() * 10)) % 2;
         if (i % 2 == 0) {
             animation = AnimationUtils.loadAnimation(context, R.anim.swing_up_left);
         } else {
@@ -68,21 +71,28 @@ public class NegozioAdapter extends BaseAdapter {
         convertView.startAnimation(animation);
         Negozio currentNegozio = getItem(position);
         TextView nome = convertView.findViewById(R.id.nameShop);
+        TextView PersoneInCoda = convertView.findViewById(R.id.PersoneInCoda);
+        TextView PersoneDentroAlNegozio=convertView.findViewById(R.id.PersoneDentroAlNegozio);
+        PersoneDentroAlNegozio.setText("Persone dentro al negozio: "+currentNegozio.getCurrent_in_store());
+        PersoneInCoda.setText("Persone in coda: "+currentNegozio.getCurrent_queue());
 
+        PersoneDentroAlNegozio.setVisibility(View.INVISIBLE);
+        PersoneInCoda.setVisibility(View.INVISIBLE);
+        Random rand = new Random();
         ProgressBar ProgressoCoda = convertView.findViewById(R.id.ProgressCoda);
         ProgressBar ProgressoNegozio = convertView.findViewById(R.id.ProgressNegozio);
 
         ProgressoCoda.setMax(currentNegozio.getMax_queue());
         ProgressoCoda.setProgress(currentNegozio.getCurrent_queue());
-
+        //ProgressoCoda.setProgress(rand.nextInt(currentNegozio.getMax_queue()));
         ProgressoNegozio.setMax(currentNegozio.getMax_in_store());
         ProgressoNegozio.setProgress(currentNegozio.getCurrent_in_store());
-
+        //ProgressoNegozio.setProgress(rand.nextInt(currentNegozio.getMax_in_store()));
 
         ImageView logo = convertView.findViewById(R.id.ImmagineNegozio);
         Picasso.get()
                 .load(currentNegozio.getImmagine())
-                .resize(100, 100)
+                .resize(500, 500)
                 .centerCrop()
                 .into(logo);
 

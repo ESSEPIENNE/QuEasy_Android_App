@@ -19,11 +19,11 @@ import com.anychart.graphics.vector.text.VAlign;
 import com.squareup.picasso.Picasso;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class NegozioActivity extends AppCompatActivity {
     private ImageView LogoNegozio;
     private TextView nomeNegozio;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +35,24 @@ public class NegozioActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Negozio negozio = (Negozio) intent.getSerializableExtra("idNegozio");
+
+
+
+
+
+
+
+
+
+
+
 //        Picasso.get()
 //                .load(negozio.getImmagine())
 //                .resize(200, 200)
 //                .centerCrop()
 //                .into(LogoNegozio);
 
-        assert negozio != null;
+        /*assert negozio != null;
         float personeDentro = ((float) negozio.getCurrent_in_store() / negozio.getMax_in_store()) * 100;
         float personeInCoda = ((float)negozio.getCurrent_queue() / negozio.getMax_queue()) * 100;
         float postiLiberiInCoda = 100 - personeInCoda;
@@ -162,6 +173,6 @@ public class NegozioActivity extends AppCompatActivity {
         circularGauge.animation(true);
         circularGauge.autoRedraw(true);
 
-        anyChartView.setChart(circularGauge);
+        anyChartView.setChart(circularGauge);*/
     }
 }
