@@ -30,7 +30,7 @@ public class QrFragment extends Fragment {
         display.getSize(size);
         assert ctx != null;
         SharedPreferences sharedPreferences = ctx.getSharedPreferences("codice", Context.MODE_PRIVATE);
-        String cod = sharedPreferences.getString("codice", "ciaomore");
+        String cod = sharedPreferences.getString("codice", "");
         QrGenerator q = new QrGenerator(cod, size.y / 2);
         qr.setImageBitmap(q.QRGenerator());
         codice.setText(cod);

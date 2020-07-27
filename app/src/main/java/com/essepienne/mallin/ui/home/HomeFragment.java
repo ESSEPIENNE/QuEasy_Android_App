@@ -2,6 +2,7 @@ package com.essepienne.mallin.ui.home;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,13 @@ import com.essepienne.mallin.Negozio;
 import com.essepienne.mallin.NegozioAdapter;
 import com.essepienne.mallin.R;
 import com.essepienne.mallin.Richieste.Get;
+import com.pusher.client.Pusher;
+import com.pusher.client.PusherOptions;
+import com.pusher.client.channel.Channel;
+import com.pusher.client.channel.PusherEvent;
+import com.pusher.client.channel.SubscriptionEventListener;
+import com.pusher.client.connection.ConnectionEventListener;
+import com.pusher.client.connection.ConnectionStateChange;
 
 import org.json.JSONArray;
 
@@ -40,6 +48,36 @@ public class HomeFragment extends Fragment {
         GridView listaNegozi = root.findViewById(R.id.lista);
         movehere = root.findViewById(R.id.moveHere);
 
+        /*INIZIALIZZO PUSHER*/
+
+
+        PusherOptions options = new PusherOptions();
+        options.setCluster("eu");
+        Pusher pusher = new Pusher("cdf5008e5b8bd9632817", options);
+        pusher.connect();
+        pusher.connect(new ConnectionEventListener() {
+            @Override
+            public void onConnectionStateChange(ConnectionStateChange change) {
+                Log.i("Pusher","State Changed from "+change.getPreviousState()+" to "+ change.getCurrentState());
+            }
+
+            @Override
+            public void onError(String message, String code, Exception e) {
+
+            }
+        });
+        Channel channel=pusher.subscribe("codechange");
+        channel.bind("code-status-change", new SubscriptionEventListener() {
+            @Override
+            public void onEvent(PusherEvent event) {
+                AggiungiNegozi(ctx,listaNegozi);
+            }
+        });
+        /*FINE PUSHER*/
+
+
+
+
         swipeContainer = (SwipeRefreshLayout) root.findViewById(R.id.swipeContainer);
 
         root.setElevation(0f);
@@ -57,6 +95,7 @@ public class HomeFragment extends Fragment {
         });
         AggiungiNegozi(ctx,listaNegozi);
 
+        /*QUANDO FACCIO IL PULL FA IL REFRESH DEI NEGOZI*/
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -65,26 +104,32 @@ public class HomeFragment extends Fragment {
         });
         return root;
     }
-public void AggiungiNegozi(Context ctx, GridView listaNegozi){
-    Get.genericGetArray(ctx, "/stores", (response -> {
-        try {
-            ArrayList<Negozio> Negozi = new ArrayList<>();
-            JSONArray NegoziJson = (JSONArray) response;
-            for (int i = 0; i < NegoziJson.length(); i++)
-                Negozi.add(new Negozio(NegoziJson.getJSONObject(i)));
-            NegozioAdapter adapter = new NegozioAdapter(ctx, Negozi);
-            listaNegozi.setAdapter(adapter);
-            listaNegozi.setOnItemClickListener((parent, view, position, id) -> {
-                if(view==CurrentCard)closeCard();
-                else openCard(view);
 
-            });
-            swipeContainer.setRefreshing(false);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }));
-}
+
+    /*MI SALVO TUTTI I NEGOZI*/
+    public void AggiungiNegozi(Context ctx, GridView listaNegozi){
+        Get.genericGetArray(ctx, "/stores", (response -> {
+            try {
+                ArrayList<Negozio> Negozi = new ArrayList<>();
+                JSONArray NegoziJson = (JSONArray) response;
+                for (int i = 0; i < NegoziJson.length(); i++)
+                    Negozi.add(new Negozio(NegoziJson.getJSONObject(i)));
+                NegozioAdapter adapter = new NegozioAdapter(ctx, Negozi);
+                listaNegozi.setAdapter(adapter);
+                listaNegozi.setOnItemClickListener((parent, view, position, id) -> {
+                    if(view==CurrentCard)closeCard();
+                    else openCard(view);
+
+                });
+                swipeContainer.setRefreshing(false);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }));
+    }
+
+
+
     public void closeCard(){
         if(CurrentCard!=null){
             CurrentCard.animate()

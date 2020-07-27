@@ -57,7 +57,7 @@ public class NegozioAdapter extends BaseAdapter {
         } else {
             animation = AnimationUtils.loadAnimation(context, R.anim.swing_up_right);
         }
-        convertView.startAnimation(animation);
+        //convertView.startAnimation(animation);
         Negozio currentNegozio = getItem(position);
         TextView nome = convertView.findViewById(R.id.nameShop);
         TextView PersoneInCoda = convertView.findViewById(R.id.PersoneInCoda);
